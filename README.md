@@ -15,7 +15,11 @@ In the first chapter, our protagonist embarks on a quest to uncover the mysterie
 Amidst puzzles and riddles, our hero encounters a hidden society guarding ancient secrets.
 
 ### Chapter 3: The Journey Begins 🚶‍♂️
-Setting off on a perilous journey, the protagonist faces challenges that test courage and determination.
+> The art of programming is, and has always been, **the art of language design.**
+
+> Master programmers think of systems as stories to be told rather than programs to be written. They use the facilities of their chosen programming language to construct a much richer and more expressive language that can be used to tell that story. Part of that domain-specific language is the hierarchy of functions that describe all the actions that take place within that system. In an artful act of recursion those actions are written to use the very domain-specific language they define to tell their own small part of the story.
+
+>This chapter has been about the mechanics of writing functions well. If you follow the rules herein, your functions will be short, well named, and nicely organized. But never forget that your real goal is to tell the story of the system, and that the functions you write need to fit cleanly together into a clear and precise language to help you with that telling.
 
 ### Chapter 4: The Unexpected Alliance 🤝
 Unlikely allies join forces, combining their unique strengths to overcome a common adversary.

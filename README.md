@@ -15,7 +15,7 @@ Clean Code is divided into three parts. The first describes the principles, patt
 Just like a book on art, this book will be full of details. There will be lots of code.
 You'll see good code and you'll see bad code. You'll see bad code transformed into good code. You'll see lists of heuristics, disciplines, and techniques. You'll see example after example. After that, it's up to you.*
 
-✏️ Grady Booch, author of Object Oriented Analysis and Design with Applications
+- Grady Booch, author of Object Oriented Analysis and Design with Applications
 
 > The first chapter delves into the perspectives of industry celebrities as they discuss what clean code means to them. The comparison of clean code to well-written prose stood out to me due to my background in English literature. In a story, there is a beginning, a middle, and an end, filled with ups and downs. Similarly, a local variable in a program, too, goes on a journey It is up to the writer to communicate with the reader in meaningful ways.
 
@@ -87,17 +87,52 @@ public class GuessStatisticsMessage {
      }
    }
 ```
-✏️ Encapsulation and Modularity: GuessStatisticsMessage encapsulates the logic within separate methods (thereAreManyLetters, thereIsOneLetter, thereAreNoLetters) for different cases, making the code modular and easier to read. Each method handles a specific case, improving the code's readability and maintainability.
+> Encapsulation and Modularity: GuessStatisticsMessage encapsulates the logic within separate methods (thereAreManyLetters, thereIsOneLetter, thereAreNoLetters) for different cases, making the code modular and easier to read. Each method handles a specific case, improving the code's readability and maintainability.
 
-✏️ Reusability: The logic for creating the message parts (number, verb, pluralModifier) is encapsulated within private methods. This allows for easy reuse of the logic in other parts of the code or in different methods, promoting the DRY (Don't Repeat Yourself) principle.
+> Reusability: The logic for creating the message parts (number, verb, pluralModifier) is encapsulated within private methods. This allows for easy reuse of the logic in other parts of the code or in different methods, promoting the DRY (Don't Repeat Yourself) principle.
 
-✏️ Overall, the GuessStatisticsMessage class follows an object-oriented approach, allowing for better organization of code, data, and behavior. This approach aligns with principles like encapsulation and abstraction, making the codebase more maintainable and extensible in the long run.
+> Overall, the GuessStatisticsMessage class follows an object-oriented approach, allowing for better organization of code, data, and behavior. This approach aligns with principles like encapsulation and abstraction, making the codebase more maintainable and extensible in the long run.
 
 ## Chapter 3: Functions 🚶‍♂️
 
 **FUNCTIONS SHOULD DO ONE THING. THEY SHOULD DO IT WELL. THEY SHOULD DO IT ONLY.**
 
-*[One] way to know that a function is doing ‘one thing’ is if you can extract another function from it with a name that is not merely a restatement of its implementation* (p.36).
+✏️ *[One] way to know that a function is doing ‘one thing’ is if you can extract another function from it with a name that is not merely a restatement of its implementation* 
+
+✏️ *One level of abstraction per function*
+> A function call is a high-level of abstraction, whereas buffer.append(“\n”) is a low-level of abstraction.
+
+✏️ *Don’t be afraid to make a [function] name long. A long descriptive name is better than a short enigmatic name. A long descriptive name is better than a long descriptive comment*
+
+✏️ *Function Arguments*
+
+A:
+``` java
+writeField(name);
+
+// is better than:
+
+write(name);
+```
+B:
+``` java
+assertExpectedEqualsActual (expected, actual)
+```
+> This naming convention strongly mitigates the problem of having to remember the ordering of arguments.
+
+✏️ *Either your function should change the state of an object, or it should return some information about that object*
+
+Don't do this:
+``` java
+Public boolean set (String attribute, String value);
+// Returns true/false and “sets”
+
+// Solution
+If (attributeExists (“username”)) {
+setAttribute (“username”, “unclebob”);
+…
+	}
+```
 
 *The art of programming is, and has always been,* ***the art of language design.***
 

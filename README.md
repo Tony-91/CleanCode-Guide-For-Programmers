@@ -140,34 +140,78 @@ setAttribute (“username”, “unclebob”);
 
 *This chapter has been about the mechanics of writing functions well. If you follow the rules herein, your functions will be short, well named, and nicely organized. But never forget that your real goal is to tell the story of the system, and that the functions you write need to fit cleanly together into a clear and precise language to help you with that telling.*
 
-### Chapter 4: The Unexpected Alliance 🤝
-Unlikely allies join forces, combining their unique strengths to overcome a common adversary.
+## Chapter 4: Comments 🤝
+✏️ Comments Do Not Make Up for Bad Code
 
-### Chapter 5: The Dark Prophecy 🔮
-A prophecy looms large, foretelling a great calamity that threatens the existence of the entire realm.
+*One of the more common motivations for writing comments is bad code. We write a module and we know it is confusing and disorganized. We know it’s a mess. So we say to ourselves, “Ooh, I’d better comment that!” No! You’d better clean it!*
 
-### Chapter 6: The Code of Honor 💫
+✏️ Explain Yourself in Code
+
+```java
+// Check to see if the employee is eligible for full benefits
+if ((employee.flags & HOURLY_FLAG) &&
+       (employee.age > 65)) {
+…
+}
+// Recfactored, minus comment
+if (employee.isEligibleForFullBenefits()) {
+…
+}
+```
+*It takes only a few seconds of thought to explain most of your intent in code. In many cases it’s simply a matter of creating a function that says the same thing as the comment you want to write.*
+
+✏️ Don’t Use a Comment When You Can Use a Function or a Variable
+```java
+// does the module from the global list <mod> depend on the subsystem we are part of?
+   if (smodule.getDependSubsystems().contains(subSysMod.getSubSystem()))
+
+// This could be rephrased without the comment as
+   ArrayList moduleDependees = smodule.getDependSubsystems();
+   String ourSubSystem = subSysMod.getSubSystem();
+   if (moduleDependees.contains(ourSubSystem))
+```
+*The author of the original code may have written the comment first (unlikely) and then written the code to fulfill the comment. However, the author should then have refactored the code, as I did, so that the comment could be removed.*
+
+✏️ Nonlocal Information
+
+*If you must write a comment, then make sure it describes the code it appears near. Don’t offer systemwide information in the context of a local comment. Consider, for example, the javadoc comment below. Aside from the fact that it is horribly redundant, it also offers information about the default port. And yet the function has absolutely no control over what that default is. The comment is not describing the function, but some other, far distant part of the system. Of course there is no guarantee that this comment will be changed when the code containing the default is changed.*
+
+```java
+   /**
+    * Port on which fitnesse would run. Defaults to 8082.
+    *
+    * @param fitnessePort
+    */
+   public void setFitnessePort(int fitnessePort)
+   {
+     this.fitnessePort = fitnessePort;
+   }
+```
+
+## Chapter 5: Formatting 🔮
+
+### Chapter 6: The Code of Honor 💫✏️ 
 The hero learns the importance of integrity and honor, facing moral dilemmas that shape their destiny.
 
-### Chapter 7: The Hidden Sanctuary 🏰
+### Chapter 7: The Hidden Sanctuary 🏰✏️ 
 Discovering a hidden sanctuary, our protagonist unearths ancient manuscripts containing cryptic knowledge.
 
-### Chapter 8: The Battle of Elements ⚔️
+### Chapter 8: The Battle of Elements ⚔️✏️ 
 A fierce battle erupts, pitting elemental forces against each other in a struggle for dominance.
 
-### Chapter 9: The Power Within 🌟
+### Chapter 9: The Power Within 🌟✏️ 
 Harnessing newfound abilities, our hero embarks on a quest for self-discovery and enlightenment.
 
-### Chapter 10: The Tangled Web 🕸️
+### Chapter 10: The Tangled Web 🕸️✏️ 
 Intrigue and deception weave a web of lies, challenging our protagonist's wit and intellect.
 
-### Chapter 11: The Triumph of Goodness ✨
+### Chapter 11: The Triumph of Goodness ✨✏️ 
 Goodness prevails over darkness as the hero's actions inspire hope and ignite a revolution.
 
-### Chapter 12: The Final Confrontation 🏹
+### Chapter 12: The Final Confrontation 🏹✏️ 
 The ultimate showdown unfolds, testing the hero's resolve and the strength of their friendships.
 
-### Chapter 13: The Unraveling Truth 📜
+### Chapter 13: The Unraveling Truth 📜✏️ 
 Secrets are revealed, reshaping perceptions and leading to a profound understanding of the world.
 
 ### Chapter 14: The Journey's End 🌄

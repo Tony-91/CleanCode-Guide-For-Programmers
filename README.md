@@ -366,6 +366,9 @@ public class Sensors {
 *Code at the boundaries needs clear separation and tests that define expectations. We should avoid letting too much of our code know about the third-party particulars. It’s better to depend on something you control than on something you don’t control, lest it end up controlling you.*
 
 *We manage third-party boundaries by having very few places in the code that refer to them. We may wrap them as we did with Map, or we may use an ADAPTER to convert from our perfect interface to the provided interface. Either way our code speaks to us better, promotes internally consistent usage across the boundary, and has fewer maintenance points when the third-party code changes.*
+> The importance of dealing with external components or code boundaries in software development. These boundaries are where your code interacts with code or systems that are not under your direct control.
+
+> To manage these boundaries effectively, you should limit the number of places in your code that directly reference or interact with these external systems. You can wrap them in a way that makes them more predictable and manageable for your code, or you can use an adapter to bridge the gap between your code's interface and the one provided by the external system. This approach makes your code more understandable, ensures consistent use of external systems, and reduces the effort needed to maintain your code when external components change.
 
 ## Chapter 8: The Battle of Elements ⚔️
 A fierce battle erupts, pitting elemental forces against each other in a struggle for dominance.

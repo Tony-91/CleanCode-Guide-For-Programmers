@@ -302,7 +302,7 @@ public class Main {
 
 > By introducing this intermediate level of abstraction, the Customer class adheres to **the Law of Demeter** by delegating the payment processing responsibility to the Wallet class. This encapsulates the payment processing logic within the Wallet class and allows the Customer class to remain ignorant of the internal details of the PaymentProcessor. It also provides a clear and maintainable structure for managing payment-related functionality within the system.
 
-> **1 level of abstraction = Customer -> 2 level of abstraction (neighbor) = Wallet -> 3 level of abstraction = paymentProcessing.**
+> **1 level of abstraction = `Customer` -> 2 level of abstraction (neighbor) = `Wallet` -> 3 level of abstraction = `PaymentProcessing`.**
 
 > The key principle of **the Law of Demeter** is to limit the exposure of an object's internal structure to the outside world, and the Wallet class helps achieve that by serving as a mediator between the Customer and the PaymentProcessor.
 
@@ -345,7 +345,29 @@ public class Sensors {
 
 *If you use a boundary interface like Map, keep it inside the class, or close family of classes, where it is used. Avoid returning it from, or accepting it as an argument to public APIs.*
 
-## Chapter 8: The Battle of Elements ⚔️✏️ 
+*Learning the third-party code is hard. Integrating the third-party code is hard too. Doing both at the same time is doubly hard. What if we took a different approach? Instead of experimenting and trying out the new stuff in our production code, we could write some tests to explore our understanding of the third-party code. Jim Newkirk calls such tests **learning tests**.*
+
+> "Learning Tests" is a concept related to test-driven development (TDD) and software testing.
+
+> Learning tests are used in situations where developers are learning how to use a new framework, language, or API. Instead of testing the behavior of the software, these tests are written to explore and understand the capabilities and limitations of the technology being learned. Learning tests act as experiments or experiments-driven tests that help developers learn and gain insights into the new technology.
+
+✏️ Learning `log4j`
+
+*Now we know how to get a simple console logger initialized, and we can encapsulate that knowledge into our own logger class so that the rest of our application is isolated from the log4j boundary interface.*
+
+✏️ Learning Tests Are Better Than Free
+
+*Whether you need the learning provided by the learning tests or not, a clean boundary should be supported by a set of outbound tests that exercise the interface the same way the production code does. Without these boundary tests to ease the migration, we might be tempted to stay with the old version longer than we should.*
+
+✏️ Clean Boundaries
+
+*Interesting things happen at boundaries. Change is one of those things. Good software designs accommodate change without huge investments and rework. When we use code that is out of our control, special care must be taken to protect our investment and make sure future change is not too costly.*
+
+*Code at the boundaries needs clear separation and tests that define expectations. We should avoid letting too much of our code know about the third-party particulars. It’s better to depend on something you control than on something you don’t control, lest it end up controlling you.*
+
+*We manage third-party boundaries by having very few places in the code that refer to them. We may wrap them as we did with Map, or we may use an ADAPTER to convert from our perfect interface to the provided interface. Either way our code speaks to us better, promotes internally consistent usage across the boundary, and has fewer maintenance points when the third-party code changes.*
+
+## Chapter 8: The Battle of Elements ⚔️
 A fierce battle erupts, pitting elemental forces against each other in a struggle for dominance.
 
 ## Chapter 9: The Power Within 🌟

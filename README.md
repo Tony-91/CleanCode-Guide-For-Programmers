@@ -318,7 +318,7 @@ Map<Sensor> sensors = new HashMap<Sensor>();
        Sensor s = sensors.get(sensorId );
 ```
 
-*[However] passing an instance of Map<Sensor> liberally around the system means that there will be a lot of places to fix if the interface to Map ever changes. Indeed, we’ve seen systems that are inhibited from using generics because of the sheer magnitude of changes needed to make up for the liberal use of Maps.*
+*[However,] passing an instance of Map<Sensor> liberally around the system means that there will be a lot of places to fix if the interface to Map ever changes. Indeed, we’ve seen systems that are inhibited from using generics because of the sheer magnitude of changes needed to make up for the liberal use of Maps.*
 
 *A cleaner way to use Map might look like the following. No user of Sensors would care one bit if generics were used or not. That choice has become (and always should be) an implementation detail.*
 ```java
@@ -341,23 +341,23 @@ public class Sensors {
 *The interface at the boundary (Map) is hidden. It is able to evolve with very little impact on the rest of the application.*
 
 *This interface is also tailored and constrained to meet the needs of the application. It results in code that is easier to understand and harder to misuse. The Sensors class can enforce design and business rules.*
-> MAP functionality is abstrated away into a class - safer to use, harder to misue.
+> MAP functionality is abstracted away into a class - safer to use, harder to misue.
 
 *If you use a boundary interface like Map, keep it inside the class, or close family of classes, where it is used. Avoid returning it from, or accepting it as an argument to public APIs.*
 
-### Chapter 8: The Battle of Elements ⚔️✏️ 
+## Chapter 8: The Battle of Elements ⚔️✏️ 
 A fierce battle erupts, pitting elemental forces against each other in a struggle for dominance.
 
-### Chapter 9: The Power Within 🌟
+## Chapter 9: The Power Within 🌟
 Harnessing newfound abilities, our hero embarks on a quest for self-discovery and enlightenment.
 
-### Chapter 10: The Tangled Web 🕸️✏️ 
+## Chapter 10: The Tangled Web 🕸️✏️ 
 Intrigue and deception weave a web of lies, challenging our protagonist's wit and intellect.
 
-### Chapter 11: The Triumph of Goodness ✨✏️ 
+## Chapter 11: The Triumph of Goodness ✨✏️ 
 Goodness prevails over darkness as the hero's actions inspire hope and ignite a revolution.
 
-### Chapter 12: The Final Confrontation 🏹✏️ 
+## Chapter 12: The Final Confrontation 🏹✏️ 
 The ultimate showdown unfolds, testing the hero's resolve and the strength of their friendships.
 
 ### Chapter 13: The Unraveling Truth 📜✏️ 

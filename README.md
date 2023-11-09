@@ -189,11 +189,124 @@ if (employee.isEligibleForFullBenefits()) {
 ```
 
 ## Chapter 5: Formatting 🔮
+✏️ The Purpose of Formatting
 
-### Chapter 6: The Code of Honor 💫✏️ 
-The hero learns the importance of integrity and honor, facing moral dilemmas that shape their destiny.
+*Perhaps you thought that “getting it working” was the first order of business for a professional developer. I hope by now, however, that this book has disabused you of that idea. The functionality that you create today has a good chance of changing in the next release, but the readability of your code will have a profound effect on all the changes that will ever be made. The coding style and readability set precedents that continue to affect maintainability and extensibility long after the original code has been changed beyond recognition. Your style and discipline survives, even though your code does not.*
 
-### Chapter 7: The Hidden Sanctuary 🏰✏️ 
+✏️ Indentation 
+
+*A source file is a hierarchy rather like an outline. There is information that pertains to the file as a whole, to the individual classes within the file, to the methods within the classes, to the blocks within the methods, and recursively to the blocks within the blocks. Each level of this hierarchy is a scope into which names can be declared and in which declarations and executable statements are interpreted.*
+
+*To make this hierarchy of scopes visible, we indent the lines of source code in proportion to their position in the hiearchy.*
+
+*Programmers rely heavily on this indentation scheme. They visually line up lines on the left to see what scope they appear in. This allows them to quickly hop over scopes, such as implementations of if or while statements, that are not relevant to their current situation. They scan the left for new method declarations, new variables, and even new classes. Without indentation, programs would be virtually unreadable by humans.*
+
+> EXAMPLE
+```java
+public class FitNesseServer implements SocketServer { private FitNesseContext 
+   context; public FitNesseServer(FitNesseContext context) { this.context = 
+   context; } public void serve(Socket s) { serve(s, 10000); } public void 
+   serve(Socket s, long requestTimeout) { try { FitNesseExpediter sender = new 
+   FitNesseExpediter(s, context); 
+   sender.setRequestParsingTimeLimit(requestTimeout); sender.start(); } 
+   catch(Exception e) { e.printStackTrace(); } } }
+```
+
+> VERSUS
+
+```java
+   public class FitNesseServer implements SocketServer {
+     private FitNesseContext context;
+
+     public FitNesseServer(FitNesseContext context) {
+       this.context = context;
+     }
+
+     public void serve(Socket s) {
+       serve(s, 10000);
+     }
+
+     public void serve(Socket s, long requestTimeout) {
+       try {
+         FitNesseExpediter sender = new FitNesseExpediter(s, context);
+         sender.setRequestParsingTimeLimit(requestTimeout);
+         sender.start();
+       }
+       catch (Exception e) {
+         e.printStackTrace();
+       }
+    }
+  }
+```
+## Chapter 6: Objects and Data Structures 💫
+
+*Objects hide their data behind abstractions and expose functions that operate on that data. Data structure expose their data and have no meaningful functions.*
+
+*Objects expose behavior and hide data. This makes it easy to add new kinds of objects without changing existing behaviors. It also makes it hard to add new behaviors to existing objects. Data structures expose data and have no significant behavior. This makes it easy to add new behaviors to existing data structures but makes it hard to add new data structures to existing functions.*
+
+*In any given system we will sometimes want the flexibility to add new data types, and so we prefer objects for that part of the system. Other times we will want the flexibility to add new behaviors, and so in that part of the system we prefer data types and procedures. Good software developers understand these issues without prejudice and choose the approach that is best for the job at hand.*
+
+✏️ The Law of Demeter
+
+*There is a well-known heuristic called the Law of Demeter that says a module should not know about the innards of the objects it manipulates.*
+
+*This means that an object should not expose its internal structure through accessors because to do so is to expose, rather than to hide, its internal structure. The method should not invoke methods on objects that are returned by any of the allowed functions. In other words, talk to friends, not to strangers.*
+
+> More on **The Law of Demeter** : an object should only communicate with its immediate neighbors and should not have knowledge of the internal details of other objects. This promotes encapsulation and reduces dependencies between classes, leading to more maintainable and flexible code.  The idea is to minimize the number of relationships an object has with other objects and to keep interactions as local as possible to reduce coupling and maintain encapsulation.
+
+> EXAMPLE
+```java
+class PaymentProcessor {
+    public void processPayment(double amount) {
+        // Logic for processing payment
+        System.out.println("Payment processed: $" + amount);
+    }
+}
+
+class Wallet {
+    private PaymentProcessor paymentProcessor;
+
+    public Wallet() {
+        this.paymentProcessor = new PaymentProcessor();
+    }
+
+    public void makePayment(double amount) {
+        // Delegate payment processing to PaymentProcessor
+        paymentProcessor.processPayment(amount);
+    }
+}
+
+class Customer {
+    private Wallet wallet;
+
+    public Customer() {
+        this.wallet = new Wallet();
+    }
+
+    public void purchaseItem(double amount) {
+        // Customer makes a payment through the wallet
+        wallet.makePayment(amount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Customer customer = new Customer();
+        double itemPrice = 50.0;
+        customer.purchaseItem(itemPrice);
+    }
+}
+```
+
+> The Wallet class is considered an immediate neighbor of the Customer class because it represents an intermediate level of abstraction between the Customer and the PaymentProcessor. The Customer class directly interacts with the Wallet class, and the Wallet class, in turn, interacts with the PaymentProcessor.
+
+> By introducing this intermediate level of abstraction, the Customer class adheres to **the Law of Demeter** by delegating the payment processing responsibility to the Wallet class. This encapsulates the payment processing logic within the Wallet class and allows the Customer class to remain ignorant of the internal details of the PaymentProcessor. It also provides a clear and maintainable structure for managing payment-related functionality within the system.
+
+> **1 level of abstraction = Customer -> 2 level of abstraction (neighbor) = Wallet -> 3 level of abstraction = paymentProcessing.**
+
+> The key principle of **the Law of Demeter** is to limit the exposure of an object's internal structure to the outside world, and the Wallet class helps achieve that by serving as a mediator between the Customer and the PaymentProcessor.
+
+## Chapter 7: The Hidden Sanctuary 🏰✏️ 
 Discovering a hidden sanctuary, our protagonist unearths ancient manuscripts containing cryptic knowledge.
 
 ### Chapter 8: The Battle of Elements ⚔️✏️ 

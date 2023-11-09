@@ -306,13 +306,49 @@ public class Main {
 
 > The key principle of **the Law of Demeter** is to limit the exposure of an object's internal structure to the outside world, and the Wallet class helps achieve that by serving as a mediator between the Customer and the PaymentProcessor.
 
-## Chapter 7: The Hidden Sanctuary 🏰✏️ 
-Discovering a hidden sanctuary, our protagonist unearths ancient manuscripts containing cryptic knowledge.
+## Chapter 7: Boundaries 🏰 
+✏️ Using Third-Party Code
+
+*If our application needs a Map of Sensors, you might find the sensors set up like this:*
+```java
+Map<Sensor> sensors = new HashMap<Sensor>();
+
+   …
+
+       Sensor s = sensors.get(sensorId );
+```
+
+*[However] passing an instance of Map<Sensor> liberally around the system means that there will be a lot of places to fix if the interface to Map ever changes. Indeed, we’ve seen systems that are inhibited from using generics because of the sheer magnitude of changes needed to make up for the liberal use of Maps.*
+
+*A cleaner way to use Map might look like the following. No user of Sensors would care one bit if generics were used or not. That choice has become (and always should be) an implementation detail.*
+```java
+public class Sensors {
+
+     private Map sensors = new HashMap();
+
+
+     public Sensor getById(String id) {
+
+       return (Sensor) sensors.get(id);
+
+     }
+
+     //snip
+
+   }
+```
+
+*The interface at the boundary (Map) is hidden. It is able to evolve with very little impact on the rest of the application.*
+
+*This interface is also tailored and constrained to meet the needs of the application. It results in code that is easier to understand and harder to misuse. The Sensors class can enforce design and business rules.*
+> MAP functionality is abstrated away into a class - safer to use, harder to misue.
+
+*If you use a boundary interface like Map, keep it inside the class, or close family of classes, where it is used. Avoid returning it from, or accepting it as an argument to public APIs.*
 
 ### Chapter 8: The Battle of Elements ⚔️✏️ 
 A fierce battle erupts, pitting elemental forces against each other in a struggle for dominance.
 
-### Chapter 9: The Power Within 🌟✏️ 
+### Chapter 9: The Power Within 🌟
 Harnessing newfound abilities, our hero embarks on a quest for self-discovery and enlightenment.
 
 ### Chapter 10: The Tangled Web 🕸️✏️ 

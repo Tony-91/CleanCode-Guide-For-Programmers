@@ -329,8 +329,9 @@ ACMEPort port = new ACMEPort(12);
    } finally {
      …
    }
-```
 
+```
+> VERSUS
 
 ``` java
 LocalPort port = new LocalPort(12);

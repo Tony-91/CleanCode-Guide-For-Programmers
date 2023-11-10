@@ -306,7 +306,70 @@ public class Main {
 
 > The key principle of **the Law of Demeter** is to limit the exposure of an object's internal structure to the outside world, and the Wallet class helps achieve that by serving as a mediator between the Customer and the PaymentProcessor.
 
-## Chapter 7: Boundaries 🏰 
+## Chapter 7: Error handling ⚔️
+
+✏️ Error handling is important, but if it obscures logic, it’s wrong 
+
+✏️ Define Exception Classes in Terms of a Caller’s Needs
+
+``` java
+ACMEPort port = new ACMEPort(12);
+
+   try {
+     port.open();
+   } catch (DeviceResponseException e) {
+     reportPortError(e);
+     logger.log(“Device response exception”, e);
+   } catch (ATM1212UnlockedException e) {
+     reportPortError(e);
+     logger.log(“Unlock exception”, e);
+   } catch (GMXError e) {
+     reportPortError(e);
+     logger.log(“Device response exception”);
+   } finally {
+     …
+   }
+```
+
+
+``` java
+LocalPort port = new LocalPort(12);
+   try {
+     port.open();
+   } catch (PortDeviceFailure e) {
+     reportError(e);
+     logger.log(e.getMessage(), e);
+   } finally {
+     …
+   }
+
+public class LocalPort {
+     private ACMEPort innerPort;
+
+     public LocalPort(int portNumber) {
+       innerPort = new ACMEPort(portNumber);
+     }
+
+     public void open() {
+       try {
+         innerPort.open();
+       } catch (DeviceResponseException e) {
+         throw new PortDeviceFailure(e);
+       } catch (ATM1212UnlockedException e) {
+         throw new PortDeviceFailure(e);
+       } catch (GMXError e) {
+         throw new PortDeviceFailure(e);
+       }
+     }
+     …
+   }
+```
+
+> Encapsulation and Abstraction: The LocalPort class encapsulates the details of the ACMEPort and its exceptions, abstracting away the complexity of dealing with various specific exceptions. This encapsulation provides a clean interface to users of the LocalPort class, shielding them from low-level implementation details.
+
+*Clean code is readable, but it must also be robust. These are not conflicting goals. We can write robust clean code if we see error handling as a separate concern, something that is viewable independently of our main logic. To the degree that we are able to do that, we can reason about it independently, and we can make great strides in the maintainability of our code.*
+
+## Chapter 8: Boundaries 🏰 
 ✏️ Using Third-Party Code
 
 *If our application needs a Map of Sensors, you might find the sensors set up like this:*
@@ -370,8 +433,7 @@ public class Sensors {
 
 > To manage these boundaries effectively, you should limit the number of places in your code that directly reference or interact with these external systems. You can wrap them in a way that makes them more predictable and manageable for your code, or you can use an adapter to bridge the gap between your code's interface and the one provided by the external system. This approach makes your code more understandable, ensures consistent use of external systems, and reduces the effort needed to maintain your code when external components change.
 
-## Chapter 8: The Battle of Elements ⚔️
-A fierce battle erupts, pitting elemental forces against each other in a struggle for dominance.
+
 
 ## Chapter 9: The Power Within 🌟
 Harnessing newfound abilities, our hero embarks on a quest for self-discovery and enlightenment.
